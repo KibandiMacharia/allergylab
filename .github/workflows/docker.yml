@@ -1,4 +1,4 @@
-name: AllergyLab CI/CD
+name: AllergyLab CI
 
 on: [push]
 
@@ -6,10 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the Docker images
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Build images
         run: |
-          cd part7a
-          docker build -t ${{secrets.DOCKER_USERNAME}}/al-app:latest ./app
-          docker build -t ${{secrets.DOCKER_USERNAME}}/al-dv-loader:latest ./db-loader
-          docker build -t ${{secrets.DOCKER_USERNAME}}/al-email:latest ./app
+          cd Part7a
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/al-app:latest ./app
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/al-db-loader:latest ./db-loader
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/al-email:latest ./email
