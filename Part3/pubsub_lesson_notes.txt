@@ -1,0 +1,22 @@
+create docker network
+>docker network create pubsub-net
+
+run redis container
+>docker run -d --rm --name redis-server --network=pubsub-net -p 6379:6379 redis
+
+build 
+>part3/subscriber> docker build -t 104interactive .
+
+start intercative container
+>docker run -it --network=pubsub-net --name subscriber 104interactive
+
+>>>execute all lines from subscriber.py in the intercative terminal
+
+
+
+publisher intercative container
+
+>docker run -it --rm --name publisher --network=pubsub-net 104interactive
+
+
+>>>execute all lines from publisher.py in the intercative terminal

@@ -1,0 +1,24 @@
+docker pull quanticschoolofbusiness/103mysql
+
+docker build -t pythonapp:latest .
+
+docker network create python-app-network
+
+docker network ls
+
+docker run --name dbhost -d --network=python-app-network quanticschoolofbusiness/103mysqldocker run --name dbhost -d --network=python-app-network quanticschoolofbusiness/103mysql
+
+docker run --name app -d -p 3006:3006 --network=python-app-network pythonapp
+
+
+docker ps
+PS C:\Users\Admin\OneDrive\Documents\Pro\Documents\Learning\Quantic MSSE\MSSE Cousework\8. Microservices\allergylab\part2\app> docker ps
+CONTAINER ID   IMAGE                              COMMAND                  CREATED         STATUS                   PORTS                                         NAMES
+330bf6e5a804   pythonapp                          "python app.py"          2 minutes ago   Up 2 minutes             0.0.0.0:3006->3006/tcp, [::]:3006->3006/tcp   app
+a1df46cf4a5a   quanticschoolofbusiness/103mysql   "/entrypoint.sh mysq…"   3 minutes ago   Up 3 minutes (healthy)   3306/tcp, 33060-33061/tcp                     dbhost
+
+
+
+docker stop app
+
+docker stop dbhost
